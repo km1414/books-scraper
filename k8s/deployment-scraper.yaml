@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scraper-deployment
+  labels:
+    app: scraper
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: scraper
+  template:
+    metadata:
+      labels:
+        app: scraper
+    spec:
+      containers:
+      - name: scraper
+        image: km1414/scraper:latest
+        imagePullPolicy: Always
+        env:
+          - name: GRPC_HOST
+            value: "parser-service"
+          - name: GRPC_PORT
+            value: "50014"
+          - name: INTERVAL_MINUTES
+            value: "1"

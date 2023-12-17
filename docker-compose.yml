@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  scraper:
+    container_name: scraper
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - GRPC_HOST=parser
+      - GRPC_PORT=50014
+      - INTERVAL_MINUTES=1
+    networks:
+      - scraper_network
+  parser:
+    container_name: parser
+    build:
+      context: .
+      dockerfile: Dockerfile-parser
+    environment:
+      - GRPC_PORT=50014
+    ports:
+      - 50014:50014
+    networks:
+      - scraper_network
+    volumes:
+      - ./data:/data
+
+networks:
+  scraper_network:
+    driver: bridge
+    name: scraper_network

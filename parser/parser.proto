@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package parser;
+
+service Parser {
+  rpc Parse (Request) returns (Response) {}
+}
+
+message Request {
+  string data = 1;
+}
+
+message Response {
+  string message = 1;
+}

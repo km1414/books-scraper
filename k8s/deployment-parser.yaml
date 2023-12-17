@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: parser-deployment
+  labels:
+    app: parser
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: parser
+  template:
+    metadata:
+      labels:
+        app: parser
+    spec:
+      containers:
+      - name: parser
+        image: km1414/parser:latest
+        imagePullPolicy: Always
+        env:
+          - name: GRPC_PORT
+            value: "50014"
+        ports:
+        - containerPort: 50014

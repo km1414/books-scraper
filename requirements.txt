@@ -1,0 +1,8 @@
+requests
+BeautifulSoup4
+aiohttp
+pandas
+schedule
+pandera
+grpcio
+grpcio-tools
